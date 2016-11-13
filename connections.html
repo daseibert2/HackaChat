@@ -4,27 +4,16 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <title>Compatibility</title>
+  <title>Connections</title>
 </head>
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/nvd3/1.8.4/nv.d3.min.css">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.0.26/css/bulma.min.css" >
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css">
 <style>
   #center{
     margin-top: 15px;
   }
-  .container{
-    display: flex;
-    justify-content: space-around;
-    /*align-items: center;*/
-    /*margin-top: 300px;*/
-    /*height: 100%;*/
-    width: 60%;
-    margin: 30px auto;
-  }
 </style>
 <body>
-
   <nav class="nav">
   <div class="nav-left">
     <a class="nav-item is-brand" href="app.html">
@@ -55,72 +44,65 @@
   </div>
 </nav>
 
-<div class="container">
-<div class="card">
-  <div class="card-image">
-    <figure class="image is-4by3">
-      <img src="http://blog.opentechschool.org/assets/content/python.png" alt="">
-    </figure>
-  </div>
-  <div class="card-content">
-    <div class="media">
+  <div class="box">
+    <article class="media">
       <div class="media-left">
-        <figure class="image is-32x32">
-          <img src="https://avatars1.githubusercontent.com/u/23143185?v=3&s=460" alt="Image">
+        <figure class="image is-64x64">
+          <img src="http://placehold.it/128x128" alt="Image">
         </figure>
       </div>
       <div class="media-content">
-        <p class="title is-5">Dana Seibert</p>
+        <div class="content">
+          <p>
+            <strong>John Smith</strong>
+            <br>
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean efficitur sit amet massa fringilla egestas. Nullam condimentum luctus turpis.
+          </p>
+        </div>
       </div>
-    </div>
+    </article>
+  </div>
 
-    <div class="content">
-      <ul>
-        <li>3 years of experience</li>
-        <li>Attended 2 hackathons</li>
-        <li>More interested in learning than winning</li>
-        <li>Knows Software</li>
-        <li>Mech. Engi. Undergrad</li>
-      </ul>
-    </div>
-  </div>
-</div>
-<br>
-<div class="card">
-  <div class="card-image">
-    <figure class="image is-4by3">
-      <img src="https://www.sitepoint.com/wp-content/themes/sitepoint/assets/images/icon.php.png" alt="">
-    </figure>
-  </div>
-  <div class="card-content">
-    <div class="media">
+  <div class="box">
+    <article class="media">
       <div class="media-left">
-        <figure class="image is-32x32">
-          <img src="http://faceyourmanga.com/mangatars/0/0/39/normal_511.png" alt="Image">
+        <figure class="image is-64x64">
+          <img src="http://placehold.it/128x128" alt="Image">
         </figure>
       </div>
       <div class="media-content">
-        <p class="title is-5">John Smith</p>
+        <div class="content">
+          <p>
+            <strong>John Smith</strong>
+            <br>
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean efficitur sit amet massa fringilla egestas. Nullam condimentum luctus turpis.
+          </p>
+        </div>
       </div>
-    </div>
-
-    <div class="content">
-      <ul>
-        <li>10 years of experience</li>
-        <li>Attended 21 hackathons</li>
-        <li>More interested in winning than learning</li>
-        <li>Knows Hardware</li>
-        <li>Elec. Engi. Undergrad</li>
-      </ul>
-    </div>
+    </article>
   </div>
-</div>
-</div>
+
+  <div class="box">
+    <article class="media">
+      <div class="media-left">
+        <figure class="image is-64x64">
+          <img src="http://placehold.it/128x128" alt="Image">
+        </figure>
+      </div>
+      <div class="media-content">
+        <div class="content">
+          <p>
+            <strong>John Smith</strong>
+            <br>
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean efficitur sit amet massa fringilla egestas. Nullam condimentum luctus turpis.
+          </p>
+        </div>
+      </div>
+    </article>
+  </div>
 
   <script src="https://code.jquery.com/jquery-2.2.4.min.js"></script>
   <script src="https://www.gstatic.com/firebasejs/3.6.0/firebase.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/nvd3/1.8.4/nv.d3.min.js"></script>
-
   <script>
 
   if (localStorage.getItem("user")==undefined){
@@ -149,17 +131,15 @@
   $("#connections").click(function(){
     window.location.replace('connections.html')
   });
-
-     $("#sign_out").click(function(){
-       firebase.auth().signOut().then(function() {
-      //console.log("Signed out");
-      localStorage.clear()
-      window.location.replace('index.html')
-      }, function(error) {
-      //console.log("Fail");
-      });
-     })
-
-  </script>
+  $("#sign_out").click(function(){
+    firebase.auth().signOut().then(function() {
+   //console.log("Signed out");
+   localStorage.clear()
+   window.location.replace('index.html')
+   }, function(error) {
+   //console.log("Fail");
+   });
+  })
+</script>
 </body>
 </html>
