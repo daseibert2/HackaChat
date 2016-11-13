@@ -27,10 +27,14 @@
   .media{
     display: flex;
     justify-content: flex-start;
-    margin-left: 25vh;
+    margin-left: 125pt;
   }
   .media-content{
     margin-top: 7px;
+  }
+  #edit{
+    width: 80pt;
+    margin-left: 150pt;
   }
 </style>
 <body>
@@ -90,9 +94,9 @@
         <li>More interested in learning than winning</li>
         <li>Knows Software</li>
         <li>Mech. Engi. Undergrad</li>
+        </ul>
         <br>
         <p>Email: dseibert.edu@gmail.com</p>
-      </ul>
     </div>
     <div class="column">
       <p>Known Languages</p>
@@ -108,9 +112,12 @@
     </div>
     </div>
   </div>
+  <a id='edit' class="button is-primary">
+    Edit Info
+  </a>
   </div>
 </div>
-
+</div>
   <script src="https://code.jquery.com/jquery-2.2.4.min.js"></script>
   <script src="https://www.gstatic.com/firebasejs/3.6.0/firebase.js"></script>
   <script>
@@ -152,6 +159,9 @@
    //console.log("Fail");
    });
   })
+  $("#edit").click(function(){
+    window.location.replace('edit.html')
+  });
 </script>
 </body>
 </html>

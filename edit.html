@@ -4,9 +4,8 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <title>Compatibility</title>
+  <title>Edit Info</title>
 </head>
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/nvd3/1.8.4/nv.d3.min.css">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.0.26/css/bulma.min.css" >
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css">
 <style>
@@ -15,26 +14,25 @@
   }
   .container{
     display: flex;
-    justify-content: space-around;
+    justify-content: center;
     /*align-items: center;*/
     /*margin-top: 300px;*/
     /*height: 100%;*/
     width: 60%;
     margin: 30px auto;
-
-  }
-  #chart{
-    margin: 15pt;
   }
   .card{
     width: auto;
   }
   .media{
-    width: 210pt;
+    display: flex;
+    justify-content: flex-start;
+  }
+  .media-content{
+    margin-top: 7px;
   }
 </style>
 <body>
-
   <nav class="nav">
   <div class="nav-left">
     <a class="nav-item is-brand" href="app.html">
@@ -67,11 +65,6 @@
 
 <div class="container">
 <div class="card">
-  <div class="card-image">
-    <figure class="image is-4by3">
-      <img src="http://blog.opentechschool.org/assets/content/python.png" alt="">
-    </figure>
-  </div>
   <div class="card-content">
     <div class="media">
       <div class="media-left">
@@ -80,58 +73,46 @@
         </figure>
       </div>
       <div class="media-content">
-        <p class="title is-5">Dana Seibert</p>
+        <p class="title is-5">
+          <!--${data.name}-->
+          Dana Seibert</p>
       </div>
     </div>
 
     <div class="content">
-      <ul>
+      <div class="columns">
+      <div class="column">
+        <p>General Information</p>
+        <ul>
         <li>3 years of experience</li>
         <li>Attended 2 hackathons</li>
         <li>More interested in learning than winning</li>
         <li>Knows Software</li>
         <li>Mech. Engi. Undergrad</li>
-      </ul>
+        <li>Add new item?</li>
+        </ul>
+        <p>Email: dseibert.edu@gmail.com<br>Want to change this?</p>
     </div>
-  </div>
-</div>
-<br>
-<img id= "chart" src="https://mail.google.com/mail/u/0/?ui=2&ik=1532bfe965&view=fimg&th=1585c57a6e4b3d91&attid=0.1&disp=emb&realattid=ii_1585c577b8c0541f&attbid=ANGjdJ9979teUNHGkEm387upvSabpQUZtQfvxS_5vmN_9qXBRr5j4nCTKRmbQ35xJq09E9jtXTonJ0JV4bUqn5HupxOjE-3hNEUntW-MZUnCWOd_SzgzkFzfQoSRTFc&sz=w908-h564&ats=1479018000796&rm=1585c57a6e4b3d91&zw&atsh=1">
-<div class="card">
-  <div class="card-image">
-    <figure class="image is-4by3">
-      <img src="https://www.sitepoint.com/wp-content/themes/sitepoint/assets/images/icon.php.png" alt="">
-    </figure>
-  </div>
-  <div class="card-content">
-    <div class="media">
-      <div class="media-left">
-        <figure class="image is-32x32">
-          <img src="http://faceyourmanga.com/mangatars/0/0/39/normal_511.png" alt="Image">
-        </figure>
-      </div>
-      <div class="media-content">
-        <p class="title is-5">John Smith</p>
-      </div>
-    </div>
-
-    <div class="content">
+    <div class="column">
+      <p>Known Languages</p>
       <ul>
-        <li>10 years of experience</li>
-        <li>Attended 21 hackathons</li>
-        <li>More interested in winning than learning</li>
-        <li>Knows Hardware</li>
-        <li>Elec. Engi. Undergrad</li>
+        <li>PHP</li>
+        <li>Python</li>
+        <li>HTML/CSS</li>
+        <li>JavaScript</li>
+        <li>Java</li>
+        <li>jQuery</li>
+        <li>Add new item?</p>
       </ul>
+      <p>School: University of Houston<br>Want to change this?</p>
     </div>
+    </div>
+  </div>
   </div>
 </div>
 </div>
-
   <script src="https://code.jquery.com/jquery-2.2.4.min.js"></script>
   <script src="https://www.gstatic.com/firebasejs/3.6.0/firebase.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/nvd3/1.8.4/nv.d3.min.js"></script>
-
   <script>
 
   if (localStorage.getItem("user")==undefined){
@@ -154,23 +135,24 @@
 
   $("#center").text(`Welcome ${name}!`)
 
+
+
   $("#myAccount").click(function(){
     window.location.replace('myAccount.html')
   });
   $("#connections").click(function(){
     window.location.replace('connections.html')
   });
+  $("#sign_out").click(function(){
+    firebase.auth().signOut().then(function() {
+   //console.log("Signed out");
+   localStorage.clear()
+   window.location.replace('index.html')
+   }, function(error) {
+   //console.log("Fail");
+   });
+  })
 
-     $("#sign_out").click(function(){
-       firebase.auth().signOut().then(function() {
-      //console.log("Signed out");
-      localStorage.clear()
-      window.location.replace('index.html')
-      }, function(error) {
-      //console.log("Fail");
-      });
-     })
-
-  </script>
+</script>
 </body>
 </html>
