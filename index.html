@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Hacka-Chat</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.0.26/css/bulma.min.css" >
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css">
+  <style>
+    div{
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+  </style>
+</head>
+<body>
+  <div>
+  <button class='button is-primary is-large' id="twitter">
+    <i class="fa fa-twitter"></i>&nbsp; Twitter
+  </button>
+  <br>
+  <button class='button is-danger is-large' id="google">
+    <i class="fa fa-google-plus"></i>&nbsp; Google
+  </button>
+  <br>
+  <button class='button is-info is-large' id="facebook">
+    <i class="fa fa-facebook"></i>&nbsp; Facebook
+  </button>
+  <br>
+  <button style='background: #b86bff; color: white;' class='button is-large' id="github">
+    <i class="fa fa-github"></i>&nbsp; GitHub
+  </button>
+  </div>
+  <script src="https://code.jquery.com/jquery-2.2.4.min.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/3.6.0/firebase.js"></script>
+  <script>
+  // Initialize Firebase
+  var config = {
+    apiKey: "AIzaSyBgc7jiOzq2TJPJbz9JQ6MUD_tSs3zDY70",
+    authDomain: "hackathon-project-4e84e.firebaseapp.com",
+    databaseURL: "https://hackathon-project-4e84e.firebaseio.com",
+    storageBucket: "hackathon-project-4e84e.appspot.com",
+    messagingSenderId: "471367040620"
+  };
+  firebase.initializeApp(config);
+
+  var providers = {
+    'twitter': new firebase.auth.TwitterAuthProvider(),
+    'google': new firebase.auth.GoogleAuthProvider(),
+    'facebook': new firebase.auth.FacebookAuthProvider(),
+    'github': new firebase.auth.GithubAuthProvider()
+}
+  $("button").click(function(){
+    console.log(this.id)
+    console.log(providers[this.id])
+    firebase.auth().signInWithPopup(providers[this.id]).then(function(result) {
+      success(result.user);
+    }).catch(function(error){
+     console.log(error);
+    });
+  });
+
+  function success(data){
+    console.log(data.displayName,data.photoURL)
+    var user= {name: data.displayName, photo: data.photoURL}
+
+    localStorage.setItem('user', JSON.stringify(user))
+    window.location.replace('app.html')
+  }
+
+  </script>
+</body>
+</html>

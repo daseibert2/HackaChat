@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Welcome!</title>
+</head>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.0.26/css/bulma.min.css" >
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css">
+<style>
+  #center{
+    margin-top: 15px;
+  }
+  #messages{
+    overflow: auto;
+    height: 75vh;
+  }
+</style>
+<body>
+  <nav class="nav">
+  <div class="nav-left">
+    <a class="nav-item is-brand" href="#">
+      <p class="title">Hacka-Chat</p>
+    </a>
+  </div>
+
+  <div class="nav-center" id='center'></div>
+
+
+  <div class="nav-right nav-menu">
+
+
+    <span class="nav-item">
+
+      <a id= "sign_out" class="button is-primary" href="#">
+        <span class="icon">
+          <i class="fa fa-sign-out"></i>
+        </span>
+        <span>Sign Out</span>
+      </a>
+    </span>
+  </div>
+</nav>
+
+<div class="container is-fluid" id="chat-window">
+    <div id="messages">Welcome to the chat! Start talkin'!</div>
+    <div>
+      <p class="control has-addons">
+        <input class="input" id='messageInput' type="text" placeholder="Send Your Message">
+        <a id='sendButton' class="button is-primary">
+          Send
+        </a>
+      </p>
+    </div>
+  </div>
+
+  <script src="https://code.jquery.com/jquery-2.2.4.min.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/3.6.0/firebase.js"></script>
+  <script>
+
+  if (localStorage.getItem("user")==undefined){
+  window.location.replace('index.html')
+}
+  // Initialize Firebase
+  var config = {
+    apiKey: "AIzaSyBgc7jiOzq2TJPJbz9JQ6MUD_tSs3zDY70",
+    authDomain: "hackathon-project-4e84e.firebaseapp.com",
+    databaseURL: "https://hackathon-project-4e84e.firebaseio.com",
+    storageBucket: "hackathon-project-4e84e.appspot.com",
+    messagingSenderId: "471367040620"
+  };
+
+  firebase.initializeApp(config);
+
+  var db= firebase.database();
+
+  var {name, photo}= JSON.parse(localStorage.getItem('user'))
+
+  $("#center").text(`Welcome ${name}!`)
+
+  $('#messageInput').keypress(function(e) {
+         if (e.keyCode == 13 )
+         sendMsg()
+     });
+
+     $('#sendButton').click(sendMsg)
+
+
+     function sendMsg(){
+        const message = $('#messageInput').val();
+        var date = String(new Date())
+        db.ref().push({message, name, photo, date});
+        $('#messageInput').val('');
+      }
+
+      db.ref().on('child_added', function(snapshot){
+     displayChatMessage(snapshot.val())
+     })
+
+     function displayChatMessage(data){
+      $(`
+
+        <article class="media">
+  <figure class="media-left">
+    <p class="image is-64x64">
+      <a href= "profile.html"><img src="${data.photo}"></a>
+    </p>
+  </figure>
+  <div class="media-content">
+    <div class="content">
+      <p>
+        <strong>${data.name}</strong> <small>${data.date}</small>
+        <br>
+        <div>${data.message}</div>
+      </p>
+    </div>
+  </div>
+</article>
+
+      `).appendTo('#messages')
+      $('#messages')[0].scrollTop= $('#messages')[0].scrollHeight;
+     }
+
+     $("#sign_out").click(function(){
+       firebase.auth().signOut().then(function() {
+      //console.log("Signed out");
+      localStorage.clear()
+      window.location.replace('index.html')
+      }, function(error) {
+      //console.log("Fail");
+      });
+     })
+
+  </script>
+</body>
+</html>
