@@ -20,7 +20,7 @@
 <body>
   <nav class="nav">
   <div class="nav-left">
-    <a class="nav-item is-brand" href="#">
+    <a class="nav-item is-brand" href="app.html">
       <p class="title">Hacka-Chat</p>
     </a>
   </div>
@@ -32,7 +32,12 @@
 
 
     <span class="nav-item">
-
+      <a id='myAccount' class="button is-primary">
+        My Account
+      </a>
+      <a id='connections' class="button is-primary">
+        Connections
+      </a>
       <a id= "sign_out" class="button is-primary" href="#">
         <span class="icon">
           <i class="fa fa-sign-out"></i>
@@ -121,7 +126,12 @@
       `).appendTo('#messages')
       $('#messages')[0].scrollTop= $('#messages')[0].scrollHeight;
      }
-
+     $("#myAccount").click(function(){
+       window.location.replace('myAccount.html')
+     });
+     $("#connections").click(function(){
+       window.location.replace('connections.html')
+     });
      $("#sign_out").click(function(){
        firebase.auth().signOut().then(function() {
       //console.log("Signed out");
